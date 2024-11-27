@@ -17,9 +17,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+       
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.bekidink.foodOrdesr"
     },
     "web": {
       "bundler": "metro",
@@ -33,6 +34,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "2ea48a45-e445-4758-baf3-d2310d28d3ff"
+      }
     }
   }
 }

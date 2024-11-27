@@ -1,4 +1,5 @@
 import { PRODUCTS } from "@/assets/products";
+import { getProduct } from "@/src/api/api";
 import { useCartStore } from "@/src/store/cart-store";
 import { Redirect, Stack, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
@@ -14,7 +15,7 @@ import { useToast } from "react-native-toast-notifications";
 
 const ProductDetails = () => {
   const { slug } = useLocalSearchParams<{ slug: string }>();
-  const product = PRODUCTS.find((product) => product.slug === slug);
+  const { data: product, error, isLoading } = getProduct(slug);
   if (!product) return <Redirect href="/" />;
   const { items, addItem, increamentItem, decrementItem } = useCartStore();
   const cartItem = items.find((item) => item.id === product.id);

@@ -1,16 +1,23 @@
-import { FlatList, StyleSheet } from "react-native";
+import { ActivityIndicator, FlatList, StyleSheet } from "react-native";
 
 import EditScreenInfo from "@/src/components/EditScreenInfo";
 import { Text, View } from "@/src/components/Themed";
 import { PRODUCTS } from "@/assets/products";
 import { ProductListItem } from "@/src/components/product-item-list";
 import { ListHeader } from "@/src/components/list-header";
+import { getProductsAndCategories } from "@/src/api/api";
 
 export default function TabOneScreen() {
+  const { data, error, isLoading } = getProductsAndCategories();
+
+  if (isLoading) return <ActivityIndicator />;
+
+  if (error || !data)
+    return <Text>Error {error?.message || "An error occured"}</Text>;
   return (
     <View>
       <FlatList
-        data={PRODUCTS}
+        data={data.products}
         renderItem={({ item }) => <ProductListItem product={item} />}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
